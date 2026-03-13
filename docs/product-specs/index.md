@@ -3,6 +3,7 @@
 本文档提供七层体系的详细规格，包括职责、价值、典型场景、典型能力与技术栈。
 
 ## 已登记方案
+- `agent-gateway-basic` 整体方案：`docs/product-specs/agent-gateway-basic.md`
 - `agent-gateway-basic` 控制台方案：`docs/product-specs/agent-gateway-basic-console.md`
 - `agent-business-solution` 详细方案：`docs/product-specs/agent-business-solution.md`
 - `atomic-ai-service` 详细方案：`docs/product-specs/atomic-ai-service.md`
