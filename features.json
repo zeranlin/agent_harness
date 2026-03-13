@@ -1,0 +1,57 @@
+{
+  "meta": {
+    "name": "agent-harness",
+    "version": "0.1.0",
+    "status": "design"
+  },
+  "features": [
+    {
+      "id": "meta-001",
+      "name": "Project Registry",
+      "description": "Register seven-layer projects with tech stack, owners, and entrypoints.",
+      "status": "planned"
+    },
+    {
+      "id": "plan-001",
+      "name": "Task Planning",
+      "description": "Epic/Story/Task planning with dependencies and milestones.",
+      "status": "planned"
+    },
+    {
+      "id": "prog-001",
+      "name": "Incremental Progress",
+      "description": "Progress tracking driven by Git activity and milestone status.",
+      "status": "planned"
+    },
+    {
+      "id": "exec-001",
+      "name": "Build/Test Orchestration",
+      "description": "Unified build and test runners for Java and Python services.",
+      "status": "planned"
+    },
+    {
+      "id": "boot-001",
+      "name": "Boot Sequence",
+      "description": "Single command to bring up individual layers or the whole stack.",
+      "status": "planned"
+    },
+    {
+      "id": "gov-001",
+      "name": "Audit & Approvals",
+      "description": "Record all control actions and require approvals for risky operations.",
+      "status": "planned"
+    },
+    {
+      "id": "obs-001",
+      "name": "Observability Hooks",
+      "description": "Standard hooks for logs, metrics, traces, and quality gates.",
+      "status": "planned"
+    },
+    {
+      "id": "doc-001",
+      "name": "Architecture & Docs",
+      "description": "Generate and maintain architecture.md and docs index.",
+      "status": "planned"
+    }
+  ]
+}
