@@ -279,6 +279,60 @@
         "docs/OBSERVABILITY.md",
         "ARCHITECTURE.md"
       ]
+    },
+    {
+      "id": "l1-console-001",
+      "name": "Operations Console",
+      "description": "L1 should provide a web operations console that exposes global overview, governance, audit, quality, and layer-level operations for L2-L7.",
+      "status": "planned",
+      "layers": [
+        "L1",
+        "L2",
+        "L3",
+        "L4",
+        "L5",
+        "L6",
+        "L7"
+      ],
+      "priority": "high",
+      "type": "backlog",
+      "acceptance_criteria": [
+        "Console exposes at least Dashboard and Operations pages.",
+        "Dashboard shows seven-layer health, traffic, and alert summary.",
+        "Operations page exposes routing, auth, quota, and audit views."
+      ],
+      "artifacts": [
+        "docs/product-specs/agent-gateway-basic-console.md",
+        "ARCHITECTURE.md",
+        "docs/QUALITY_SCORE.md"
+      ]
+    },
+    {
+      "id": "l1-console-002",
+      "name": "Debug Studio",
+      "description": "L1 should provide a debugging workspace for request construction, contract mapping inspection, trace lookup, and replay across L2-L7.",
+      "status": "planned",
+      "layers": [
+        "L1",
+        "L2",
+        "L3",
+        "L4",
+        "L5",
+        "L6",
+        "L7"
+      ],
+      "priority": "high",
+      "type": "backlog",
+      "acceptance_criteria": [
+        "Debug Studio can send requests to qa, compliance, and pricing through L1.",
+        "Debug Studio displays original request, transformed contract, and downstream response.",
+        "Debug Studio supports trace lookup or replay by request identifier."
+      ],
+      "artifacts": [
+        "docs/product-specs/agent-gateway-basic-console.md",
+        "docs/CONTRACTS.md",
+        "ARCHITECTURE.md"
+      ]
     }
   ]
 }
