@@ -53,6 +53,7 @@ flowchart LR
 - L4 不直接维护模型资产，而是消费 L6 提供的模型供给和路由依据。
 - L6 不执行模型请求，只管理模型池、版本、评测、成本和推荐路由。
 - L1 通过聚合接口查看模型池与评测情况。
+- 当前实现中，L6 的路由建议已经扩展为可返回 `preferred_endpoint`、`preferred_auth_env`、`preferred_provider` 等远程模型元数据，供 L4 执行真实远程路由。
 
 ## 5. 核心模块设计
 ### 5.1 Model Registry
@@ -145,6 +146,9 @@ flowchart LR
 - `preferred_model`
 - `fallback_model`
 - `policy_mode`
+- `preferred_endpoint`
+- `preferred_auth_env`
+- `preferred_provider`
 
 ### CostBaseline
 - `model_id`

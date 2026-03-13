@@ -57,7 +57,7 @@ flowchart LR
 - 当某个原子能力需要模型推理时，由 L3 请求 L4。
 - L4 基于任务类型、成本、延迟、健康状态进行路由和执行治理。
 - L6 提供模型池、版本、成本基线和路由输入。
-- 当前实现中，L4 会优先读取 L6 `GET /routes/recommendations/{task_type}` 作为实际路由依据，L6 不可用时再回退本地默认路由。
+- 当前实现中，L4 会优先读取 L6 `GET /routes/recommendations/{task_type}` 作为实际路由依据，消费其中的远程 endpoint、provider 和认证环境变量，并在可用时直接执行远程模型；L6 不可用或远程执行失败时再回退本地默认路由。
 
 ## 5. 核心模块设计
 ### 5.1 Request API
@@ -106,6 +106,7 @@ flowchart LR
 - 主模型
 - 备用模型
 - 降级路径
+- 远程执行所需的 provider / endpoint / auth env 元数据
 
 ### 5.5 Cache Layer
 负责结果复用。
@@ -167,6 +168,11 @@ flowchart LR
   }
 }
 ```
+
+当前补充约定：
+- 当路由来源为 L6 且返回远程模型元数据时，响应中的 `result.execution_mode` 为 `remote-l6`
+- 远程执行信息会出现在 `result.provider` 与 `result.endpoint`
+- 当远程执行失败并切换到本地备用模型时，`result.execution_mode` 为 `local-fallback`
 
 响应示例：
 ```json
