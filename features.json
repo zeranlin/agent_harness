@@ -1,9 +1,154 @@
 {
   "meta": {
     "name": "agent-harness",
-    "version": "0.1.0",
+    "version": "0.2.0",
     "status": "design"
   },
+  "layers": [
+    {
+      "id": "L1",
+      "name": "Service Operations Gateway",
+      "project": "agent-gateway-basic",
+      "tech": "Java",
+      "responsibilities": [
+        "routing",
+        "auth",
+        "metering",
+        "timing",
+        "policy-execution",
+        "audit",
+        "quota-rate-limit"
+      ],
+      "value": "Standard service entry for access, operations, billing, and regulation.",
+      "harness_support": [
+        "gateway-registration",
+        "policy-sync",
+        "audit-log-ingestion",
+        "rate-limit-config"
+      ]
+    },
+    {
+      "id": "L2",
+      "name": "AI Service Orchestration",
+      "project": "agent-business-solution",
+      "tech": "Python",
+      "responsibilities": [
+        "scenario-delivery",
+        "agent-orchestration",
+        "service-packaging"
+      ],
+      "value": "Scenario solution packages that business can consume directly.",
+      "harness_support": [
+        "workflow-registry",
+        "scenario-catalog",
+        "orchestration-runner",
+        "dependency-checks"
+      ]
+    },
+    {
+      "id": "L3",
+      "name": "Atomic Capability Engine",
+      "project": "atomic-ai-service",
+      "tech": "Python",
+      "responsibilities": [
+        "atomic-capabilities",
+        "standardized-components",
+        "reusable-interfaces"
+      ],
+      "value": "Componentized capabilities accelerate new scenario delivery.",
+      "harness_support": [
+        "capability-registry",
+        "contract-tests",
+        "version-compatibility"
+      ]
+    },
+    {
+      "id": "L4",
+      "name": "Model Runtime & Scheduling",
+      "project": "agent-model-runtime",
+      "tech": "Java",
+      "responsibilities": [
+        "model-call-governance",
+        "queueing",
+        "concurrency-control",
+        "retry-timeout",
+        "circuit-breaker",
+        "batching",
+        "caching",
+        "routing"
+      ],
+      "value": "Stable latency, throughput, cost control, and availability for model calls.",
+      "harness_support": [
+        "runtime-policy",
+        "priority-scheduling",
+        "load-shedding",
+        "execution-observability"
+      ]
+    },
+    {
+      "id": "L5",
+      "name": "Knowledge Ops",
+      "project": "agent-knowledge-ops",
+      "tech": "Python",
+      "responsibilities": [
+        "knowledge-management",
+        "data-governance",
+        "audit-pipelines",
+        "quality-pipelines",
+        "artifact-management",
+        "config-management",
+        "security-management"
+      ],
+      "value": "Trusted, traceable, and continuously improving knowledge assets.",
+      "harness_support": [
+        "knowledge-catalog",
+        "pipeline-tracking",
+        "quality-gates",
+        "lineage-metadata"
+      ]
+    },
+    {
+      "id": "L6",
+      "name": "Model Hub",
+      "project": "agent-model-hub",
+      "tech": "Python",
+      "responsibilities": [
+        "model-governance",
+        "version-management",
+        "evaluation-benchmarks",
+        "routing-strategy-input"
+      ],
+      "value": "Stable, replaceable, and measurable model capability pool.",
+      "harness_support": [
+        "model-registry",
+        "eval-tracking",
+        "cost-baselines"
+      ]
+    },
+    {
+      "id": "L7",
+      "name": "Platform Foundation",
+      "project": "agent-platform-foundation",
+      "tech": "IaC",
+      "responsibilities": [
+        "compute",
+        "storage-network",
+        "container-orchestration",
+        "messaging-cache",
+        "monitoring-alerting",
+        "logging-tracing",
+        "dr-backup",
+        "secrets-access-control"
+      ],
+      "value": "Secure, scalable, observable, and auditable foundation.",
+      "harness_support": [
+        "infra-inventory",
+        "env-baselines",
+        "deployment-hooks",
+        "observability-standards"
+      ]
+    }
+  ],
   "features": [
     {
       "id": "meta-001",
@@ -50,7 +195,7 @@
     {
       "id": "doc-001",
       "name": "Architecture & Docs",
-      "description": "Generate and maintain architecture.md and docs index.",
+      "description": "Generate and maintain ARCHITECTURE.md and docs index.",
       "status": "planned"
     }
   ]
