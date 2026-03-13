@@ -88,6 +88,7 @@
 - 查看耗时拆解
 - 查看错误定位
 - 查看重试与熔断状态
+- 支持从调试台直接触发完整链路样例：`L1 -> L2 procurement_file_review -> L3 atomic-ai-engine -> L4 agent-model-runtime -> qwen3.5-27b`
 
 ### 5.3 回放与复现
 - 根据 `request_id` 回放
@@ -206,6 +207,11 @@
 - `POST /debug/request`
 - `GET /debug/trace/{request_id}`
 - `POST /debug/replay/{request_id}`
+
+当前补充：
+- `POST /debug/request?service=qa` 支持显式传入 `scenario_code`
+- 调试结果会聚合返回 `chain_trace`
+- `chain_trace` 至少包含 L1、L2、L3、L4 四层结果与 `hit_qwen35_27b` 摘要
 
 ## 9. MVP 界面范围
 ### 9.1 第一阶段页面
