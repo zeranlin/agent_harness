@@ -4,6 +4,8 @@
 
 ## 已登记方案
 - `agent-business-solution` 详细方案：`docs/product-specs/agent-business-solution.md`
+- `atomic-ai-service` 详细方案：`docs/product-specs/atomic-ai-service.md`
+- `agent-model-runtime` 详细方案：`docs/product-specs/agent-model-runtime.md`
 
 ## 七层详细规格
 

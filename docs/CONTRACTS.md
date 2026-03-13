@@ -141,3 +141,95 @@ healthcheck: local script (scripts/healthcheck.sh)
 - L2 向上暴露统一场景接口
 - L2 向下屏蔽 L3/L4 的底层调用差异
 - L2 对成功和失败都返回稳定、可解析的标准结构
+
+## L3 原子能力执行契约（MVP）
+项目：`atomic-ai-service`
+
+### 入口契约
+- endpoint: `POST /invoke`
+- required fields:
+- `request_id`
+- `capability_code`
+- `tenant_id`
+- `input.document`
+
+### MVP 能力
+- `structured_extraction`
+
+### 成功响应最小字段
+- `request_id`
+- `status`
+- `provider`
+- `capability_code`
+- `evidence_count`
+- `risk_level`
+
+### 失败响应最小字段
+- `request_id`
+- `status=error`
+- `message`
+
+### 契约目标
+- L3 对外暴露标准化能力接口，而不是按场景散落私有格式
+- L3 返回可被 L2/L1 直接消费的结构化能力结果
+
+## L4 模型运行契约（MVP）
+项目：`agent-model-runtime`
+
+### 入口契约
+- endpoint: `POST /invoke`
+- required fields:
+- `request_id`
+- `task_type`
+- `tenant_id`
+- `input.payload`
+
+### MVP 任务
+- `pricing_inference`
+
+### 成功响应最小字段
+- `request_id`
+- `status`
+- `provider`
+- `task_type`
+- `runtime`
+- `model_route`
+
+### 失败响应最小字段
+- `request_id`
+- `status=error`
+- `message`
+
+### 契约目标
+- L4 暴露统一模型执行入口，屏蔽底层模型路由与调度差异
+- L4 返回稳定的模型执行元数据，供上层编排与网关运营使用
+
+## L1 下游契约映射（当前落地）
+项目：`agent-gateway-basic`
+
+### QA -> L2
+- source service: `qa`
+- target contract: `L2.intelligent_qa`
+- mapping:
+- `prompt -> input.question`
+- `service=qa -> scenario_code=intelligent_qa`
+- `x-tenant-id -> tenant_id`
+- `x-operator-id -> operator_id`
+
+### Compliance -> L3
+- source service: `compliance`
+- target contract: `L3.structured_extraction`
+- mapping:
+- `document|prompt -> input.document`
+- `service=compliance -> capability_code=structured_extraction`
+- `x-tenant-id -> tenant_id`
+- `x-operator-id -> operator_id`
+
+### Pricing -> L4
+- source service: `pricing`
+- target contract: `L4.pricing_inference`
+- mapping:
+- `payload|prompt -> input.payload`
+- `service=pricing -> task_type=pricing_inference`
+- `x-tenant-id -> tenant_id`
+- `x-operator-id -> operator_id`
