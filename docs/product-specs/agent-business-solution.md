@@ -308,3 +308,160 @@ flowchart LR
 - 场景注册表可返回场景信息
 - 至少有 1 条真实编排链路
 - 有基本执行日志和错误返回
+
+## 17. MVP 范围定义
+### 17.1 In Scope
+- 场景注册中心支持静态加载 `intelligent_qa`
+- 统一入口 `POST /invoke`
+- 程序化编排执行器
+- L3 与 L4 两个下游 adapter
+- 执行日志、错误返回、基础耗时指标
+- `GET /scenarios` 与 `GET /scenarios/{scenario_code}`
+
+### 17.2 Out Of Scope
+- 可视化编排设计器
+- 多租户配置后台
+- 场景灰度发布
+- 场景版本回滚 UI
+- L5/L6 深度集成
+- 长会话记忆与人工审批工作流
+
+## 18. MVP 目录骨架
+```text
+agent-business-solution/
+├── app.py
+├── config/
+│   └── scenarios.yaml
+├── scenario_registry/
+│   ├── models.py
+│   └── registry.py
+├── scenario_runtime/
+│   ├── runtime.py
+│   └── executor.py
+├── scenarios/
+│   └── intelligent_qa/
+│       ├── manifest.yaml
+│       └── service.py
+├── orchestrators/
+│   ├── base.py
+│   └── langgraph/
+│       └── intelligent_qa_graph.py
+├── adapters/
+│   ├── l3_atomic_ai_service.py
+│   └── l4_model_runtime.py
+├── observability/
+│   ├── audit.py
+│   └── metrics.py
+├── scripts/
+│   ├── build.sh
+│   ├── test.sh
+│   ├── run.sh
+│   └── healthcheck.sh
+└── tests/
+    ├── test_health.py
+    ├── test_registry.py
+    └── test_intelligent_qa.py
+```
+
+## 19. 首个场景：intelligent_qa
+### 19.1 场景目标
+- 面向业务用户提供带证据摘要的智能问答服务。
+- 先完成“问题输入 -> 能力调用 -> 结果归一化 -> 结构化输出”的最小闭环。
+
+### 19.2 编排步骤
+1. 校验请求并装配执行上下文
+2. 调用 L3 做问题理解、召回或证据预处理
+3. 调用 L4 做答案生成或摘要生成
+4. 组装 answer、evidence、metrics
+5. 记录 execution log 并返回结果
+
+### 19.3 成功标准
+- 同一请求可稳定返回结构化响应
+- 响应中至少包含 `answer`、`evidence`、`duration_ms`
+- 下游失败时返回标准错误结构，而不是裸异常
+
+## 20. intelligent_qa 接口契约
+### 20.1 调用入口
+```http
+POST /invoke
+Content-Type: application/json
+```
+
+### 20.2 请求体
+```json
+{
+  "request_id": "req-qa-001",
+  "scenario_code": "intelligent_qa",
+  "tenant_id": "demo",
+  "operator_id": "user-1",
+  "input": {
+    "question": "采购评审里废标条款怎么判断？"
+  },
+  "context": {
+    "channel": "gateway",
+    "source_system": "agent-gateway-basic"
+  },
+  "options": {
+    "debug": false
+  }
+}
+```
+
+### 20.3 成功响应
+```json
+{
+  "request_id": "req-qa-001",
+  "scenario_code": "intelligent_qa",
+  "status": "success",
+  "result": {
+    "answer": "根据当前规则，需先核验招标文件中的废标条款、资格要求和响应偏差。",
+    "summary": "先做条款识别，再结合规则判断是否触发废标条件。"
+  },
+  "evidence": [
+    {
+      "type": "capability_output",
+      "source": "atomic-ai-service",
+      "snippet": "已识别到资格性条款与偏差项。"
+    }
+  ],
+  "metrics": {
+    "duration_ms": 820
+  },
+  "errors": []
+}
+```
+
+### 20.4 失败响应
+```json
+{
+  "request_id": "req-qa-001",
+  "scenario_code": "intelligent_qa",
+  "status": "error",
+  "result": {},
+  "evidence": [],
+  "metrics": {
+    "duration_ms": 120
+  },
+  "errors": [
+    {
+      "code": "UPSTREAM_TIMEOUT",
+      "message": "atomic-ai-service request timed out"
+    }
+  ]
+}
+```
+
+## 21. 与 L1/L3/L4 的交互约束
+### 21.1 L1 -> L2
+- L1 通过统一网关把业务请求转发到 L2 `POST /invoke`
+- L1 负责鉴权、配额、审计与统一入口
+- L2 负责场景识别、编排执行与结果封装
+
+### 21.2 L2 -> L3
+- L2 调用 L3 获取原子能力结果
+- L3 返回结构化能力输出，L2 不直接在内部重写能力逻辑
+
+### 21.3 L2 -> L4
+- L2 调用 L4 获取模型执行结果
+- L4 负责并发、重试、稳定性治理
+- L2 只关心业务编排语义和错误映射

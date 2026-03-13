@@ -101,3 +101,43 @@ healthcheck: local script (scripts/healthcheck.sh)
 - 每个项目必须提供 build/test/run/deploy 的可执行命令
 - 测试命令必须产出机器可读报告或可解析日志
 - healthcheck 必须稳定可用
+
+## L2 场景执行契约（MVP）
+项目：`agent-business-solution`
+
+### 入口契约
+- endpoint: `POST /invoke`
+- required fields:
+- `request_id`
+- `scenario_code`
+- `tenant_id`
+- `input`
+
+### MVP 场景
+- `intelligent_qa`
+
+### 成功响应最小字段
+- `request_id`
+- `scenario_code`
+- `status`
+- `result.answer`
+- `evidence`
+- `metrics.duration_ms`
+- `errors`
+
+### 失败响应最小字段
+- `request_id`
+- `scenario_code`
+- `status=error`
+- `metrics.duration_ms`
+- `errors[].code`
+- `errors[].message`
+
+### 下游依赖
+- L3 `atomic-ai-service`
+- L4 `agent-model-runtime`
+
+### 契约目标
+- L2 向上暴露统一场景接口
+- L2 向下屏蔽 L3/L4 的底层调用差异
+- L2 对成功和失败都返回稳定、可解析的标准结构
