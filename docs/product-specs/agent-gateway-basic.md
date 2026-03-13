@@ -29,7 +29,7 @@
 
 ### 3.2 不承担的职责
 - 不承载业务场景编排逻辑：由 L2 `agent-business-solution` 负责。
-- 不承载原子能力研发：由 L3 `atomic-ai-service` 负责。
+- 不承载原子能力研发：由 L3 `atomic-ai-engine` 负责。
 - 不承载模型并发治理细节：由 L4 `agent-model-runtime` 负责。
 - 不承载知识资产生命周期治理：由 L5 `agent-knowledge-ops` 负责。
 - 不承载模型池治理：由 L6 `agent-model-hub` 负责。
@@ -49,7 +49,7 @@ flowchart LR
     GW --> OPS["运营聚合接口"]
     GW --> DBG["调试接口"]
     GW --> QA["L2 agent-business-solution"]
-    GW --> CAP["L3 atomic-ai-service"]
+    GW --> CAP["L3 atomic-ai-engine"]
     GW --> RT["L4 agent-model-runtime"]
     OPS --> K["L5 agent-knowledge-ops"]
     OPS --> M["L6 agent-model-hub"]
@@ -173,7 +173,7 @@ flowchart LR
   - `scenario_code = intelligent_qa`
 
 #### `service=compliance`
-- 目标：L3 `atomic-ai-service`
+- 目标：L3 `atomic-ai-engine`
 - 目标契约：`L3.structured_extraction`
 - 映射规则：
   - `document` 或 `prompt -> input.document`

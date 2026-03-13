@@ -110,7 +110,7 @@
 - 场景执行日志
 - 场景回放
 
-### 6.2 L3 `atomic-ai-service`
+### 6.2 L3 `atomic-ai-engine`
 - 能力目录
 - 能力版本
 - 能力调用量

@@ -48,13 +48,13 @@ healthcheck: http://127.0.0.1:8002/health
 ```
 
 ```
-project: atomic-ai-service
+project: atomic-ai-engine
 layer: L3
 tech: Python
-build: /Users/linzeran/code/2026-zn/harnees_aimp/atomic-ai-service/scripts/build.sh
-test: /Users/linzeran/code/2026-zn/harnees_aimp/atomic-ai-service/scripts/test.sh
-run: /Users/linzeran/code/2026-zn/harnees_aimp/atomic-ai-service/scripts/run.sh
-healthcheck: http://127.0.0.1:8003/health
+build: package build / wheel build (planned)
+test: local unit tests / capability tests
+run: sdk-import-only
+healthcheck: not-applicable
 ```
 
 ```
@@ -134,7 +134,7 @@ healthcheck: local script (scripts/healthcheck.sh)
 - `errors[].message`
 
 ### 下游依赖
-- L3 `atomic-ai-service`
+- L3 `atomic-ai-engine`
 - L4 `agent-model-runtime`
 
 ### 契约目标
@@ -142,36 +142,42 @@ healthcheck: local script (scripts/healthcheck.sh)
 - L2 向下屏蔽 L3/L4 的底层调用差异
 - L2 对成功和失败都返回稳定、可解析的标准结构
 
-## L3 原子能力执行契约（MVP）
-项目：`atomic-ai-service`
+## L3 原子能力 SDK 契约（MVP）
+项目：`atomic-ai-engine`
 
-### 入口契约
-- endpoint: `POST /invoke`
+### SDK 入口契约
+- import: `from atomic_ai_engine import CapabilityEngine`
+- invoke method: `engine.invoke(capability_code=..., payload=...)`
 - required fields:
 - `request_id`
 - `capability_code`
-- `tenant_id`
-- `input.document`
+- `payload`
 
 ### MVP 能力
+- `file_parse`
+- `rule_engine`
 - `structured_extraction`
+- `intent_understanding`
+- `evidence_chain_locate`
 
 ### 成功响应最小字段
 - `request_id`
 - `status`
-- `provider`
 - `capability_code`
-- `evidence_count`
-- `risk_level`
+- `result`
+- `metrics`
 
 ### 失败响应最小字段
 - `request_id`
 - `status=error`
-- `message`
+- `errors[].code`
+- `errors[].message`
 
 ### 契约目标
-- L3 对外暴露标准化能力接口，而不是按场景散落私有格式
+- L3 以统一 SDK 接口暴露标准化能力，而不是按场景散落私有格式
 - L3 返回可被 L2/L1 直接消费的结构化能力结果
+- L2 通过 SDK 接口调用 L3，不直接依赖 L3 内部模块路径
+- 凡是需要模型执行的能力，统一通过 L4 完成模型调用治理
 
 ## L4 模型运行契约（MVP）
 项目：`agent-model-runtime`

@@ -10,7 +10,7 @@ flowchart TB
     BS["agent-business-solution (Python)"]
   end
   subgraph L3["L3 原子能力引擎"]
-    AT["atomic-ai-service (Python)"]
+    AT["atomic-ai-engine (Python SDK)"]
   end
   subgraph L4["L4 模型运行时与调度"]
     MR["agent-model-runtime (Java)"]

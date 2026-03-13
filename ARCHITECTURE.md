@@ -10,7 +10,7 @@ flowchart TB
     BS["agent-business-solution (Python)"]
   end
   subgraph L3["L3 Atomic Capability Engine"]
-    AT["atomic-ai-service (Python)"]
+    AT["atomic-ai-engine (Python SDK)"]
   end
   subgraph L4["L4 Model Runtime & Scheduling"]
     MR["agent-model-runtime (Java)"]
@@ -98,7 +98,7 @@ L1 is the web entrypoint for both operations and debugging across L2-L7.
 flowchart LR
   UI["L1 Console UI"] --> API["L1 Aggregation APIs"]
   API --> L2["L2 Scenario APIs"]
-  API --> L3["L3 Capability APIs"]
+  API --> L3["L3 Capability SDK Metadata"]
   API --> L4["L4 Runtime APIs"]
   API --> L5["L5 Knowledge APIs"]
   API --> L6["L6 Model APIs"]

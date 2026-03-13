@@ -6,7 +6,7 @@
 - `agent-gateway-basic` 整体方案：`docs/product-specs/agent-gateway-basic.md`
 - `agent-gateway-basic` 控制台方案：`docs/product-specs/agent-gateway-basic-console.md`
 - `agent-business-solution` 详细方案：`docs/product-specs/agent-business-solution.md`
-- `atomic-ai-service` 详细方案：`docs/product-specs/atomic-ai-service.md`
+- `atomic-ai-engine` 详细方案：`docs/product-specs/atomic-ai-engine.md`
 - `agent-model-runtime` 详细方案：`docs/product-specs/agent-model-runtime.md`
 
 ## 七层详细规格
@@ -27,10 +27,10 @@
 - 价值：销售可讲“场景方案包”，业务可直接消费“标准场景服务”
 
 ### 3. 能力引擎层（原子能力供给层）
-- 项目名：atomic-ai-service
+- 项目名：atomic-ai-engine
 - 技术：Python
-- 职责：向第 2 层输出标准化、可复用、可组合的原子能力组件
-- 典型能力：意图理解、问题拆解、多路召回、混合检索、融合重排序、相关性过滤、知识聚合/补全、上下文管理、文件解析、结构化提取、条款提取、技参提取、规则引擎、知识图谱检索、逻辑树解释、证据链定位、安全检测等
+- 职责：以 SDK 形态向第 2 层输出标准化、可复用、可组合的原子能力组件
+- 典型能力：意图理解、问题拆解、多路召回、混合检索、融合重排序、相关性过滤、知识聚合/补全、上下文管理、文件解析、结构化提取、条款提取、技参提取、规则引擎、知识图谱检索、逻辑树解释、证据链定位等
 - 价值：研发聚焦“能力组件化与接口标准化”，快速支撑新场景上线
 
 ### 4. 模型调度与执行层（模型调用治理层，新增）

@@ -5,7 +5,7 @@
 ## 1. 目标
 - L2 负责把底层能力组织成可交付的业务场景服务。
 - 对上承接 L1 `agent-gateway-basic`。
-- 对下编排 L3 `atomic-ai-service`、L4 `agent-model-runtime`、L5 `agent-knowledge-ops`、L6 `agent-model-hub`。
+- 对下编排 L3 `atomic-ai-engine`、L4 `agent-model-runtime`、L5 `agent-knowledge-ops`、L6 `agent-model-hub`。
 - 对内提供统一的场景注册、执行、观测、版本治理能力。
 
 ## 2. 设计原则
@@ -298,7 +298,7 @@ flowchart LR
 
 ## 13. 依赖适配原则
 - L2 不直接写复杂底层逻辑
-- 通过 adapter 调用 L3/L4/L5/L6
+- 通过 adapter / SDK client 调用 L3/L4/L5/L6
 - adapter 负责超时、重试、错误映射、响应标准化
 
 ## 14. 可观测性
@@ -316,7 +316,7 @@ flowchart LR
 - 先只做一个场景：`intelligent_qa`
 - 先只支持一种编排：程序化编排
 - 先只接两个下游：
-- L3 能力服务
+- L3 能力 SDK
 - L4 模型运行时
 
 ## 16. 第一阶段验收标准
@@ -437,7 +437,7 @@ Content-Type: application/json
   "evidence": [
     {
       "type": "capability_output",
-      "source": "atomic-ai-service",
+      "source": "atomic-ai-engine",
       "snippet": "已识别到资格性条款与偏差项。"
     }
   ],
@@ -462,7 +462,7 @@ Content-Type: application/json
   "errors": [
     {
       "code": "UPSTREAM_TIMEOUT",
-      "message": "atomic-ai-service request timed out"
+      "message": "atomic-ai-engine request timed out"
     }
   ]
 }
@@ -475,7 +475,7 @@ Content-Type: application/json
 - L2 负责场景识别、编排执行与结果封装
 
 ### 21.2 L2 -> L3
-- L2 调用 L3 获取原子能力结果
+- L2 通过 L3 SDK 获取原子能力结果
 - L3 返回结构化能力输出，L2 不直接在内部重写能力逻辑
 
 ### 21.3 L2 -> L4

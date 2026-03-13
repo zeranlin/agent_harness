@@ -50,7 +50,7 @@
       "id": "L2",
       "name": "AI Service Orchestration",
       "project": "agent-business-solution",
-      "tech": "Python",
+      "tech": "Python SDK",
       "responsibilities": [
         "scenario-delivery",
         "agent-orchestration",
@@ -67,7 +67,7 @@
     {
       "id": "L3",
       "name": "Atomic Capability Engine",
-      "project": "atomic-ai-service",
+      "project": "atomic-ai-engine",
       "tech": "Python",
       "responsibilities": [
         "atomic-capabilities",
