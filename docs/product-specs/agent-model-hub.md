@@ -312,3 +312,10 @@ agent-model-hub/
 - 由 L4 消费 L6 提供的模型池与推荐路由输入。
 - 由 L1 聚合 L6 运营视图。
 - 后续再扩展路由联动、兼容性和成本治理。
+
+## 16. 当前已登记的外部模型实例
+- `qwen3.5-27b`
+- endpoint: `http://112.111.54.86:10011/v1`
+- provider: `openai-compatible`
+- 当前建议用途：`pricing_inference`、`structured_extraction`、`document_extraction`
+- 凭证策略：通过环境变量 `AGENT_MODEL_HUB_QWEN35_27B_API_KEY` 注入，不写入仓库
