@@ -8,6 +8,7 @@
 - `agent-business-solution` 详细方案：`docs/product-specs/agent-business-solution.md`
 - `atomic-ai-engine` 详细方案：`docs/product-specs/atomic-ai-engine.md`
 - `agent-model-runtime` 详细方案：`docs/product-specs/agent-model-runtime.md`
+- `agent-knowledge-ops` 详细方案：`docs/product-specs/agent-knowledge-ops.md`
 
 ## 七层详细规格
 
