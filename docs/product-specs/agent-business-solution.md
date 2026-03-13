@@ -55,6 +55,7 @@ L2 不负责：
 - `intelligent_qa`：已落地，可执行
 - `contract_review`：已落地，可执行
 - `compliance_review`：已落地，可执行
+- `procurement_file_review`：已落地，可执行，作为 L2 直连 L3 SDK 的采购文件样例场景
 
 ### 5.3 当前结论
 - L2 的设计目标是承载多个独立业务智能体。
@@ -318,6 +319,11 @@ flowchart LR
 - 先只接两个下游：
 - L3 能力 SDK
 - L4 模型运行时
+
+## 15.1 当前直连 L3 SDK 的样例场景
+- `procurement_file_review` 已作为当前第一个 L2 直接调用 L3 SDK 的场景。
+- 当前编排链路为：`file_parse -> rule_engine -> evidence_chain_locate -> structured_extraction -> L4 fallback`。
+- 其中规则命中时不进入模型兜底，规则未命中时才通过 `structured_extraction` 间接调用 L4。
 
 ## 16. 第一阶段验收标准
 - `/health` 可用
