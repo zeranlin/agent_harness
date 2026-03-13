@@ -182,6 +182,7 @@ flowchart LR
 #### `service=pricing`
 - 目标：L4 `agent-model-runtime`
 - 目标契约：`L4.pricing_inference`
+- 上游目标入口：`POST /runtime/invoke`
 - 映射规则：
   - `payload` 或 `prompt -> input.payload`
   - `task_type = pricing_inference`

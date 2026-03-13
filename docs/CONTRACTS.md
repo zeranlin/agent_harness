@@ -183,7 +183,7 @@ healthcheck: local script (scripts/healthcheck.sh)
 项目：`agent-model-runtime`
 
 ### 入口契约
-- endpoint: `POST /invoke`
+- endpoint: `POST /runtime/invoke`
 - required fields:
 - `request_id`
 - `task_type`
@@ -237,5 +237,6 @@ healthcheck: local script (scripts/healthcheck.sh)
 - mapping:
 - `payload|prompt -> input.payload`
 - `service=pricing -> task_type=pricing_inference`
+- upstream endpoint: `POST /runtime/invoke`
 - `x-tenant-id -> tenant_id`
 - `x-operator-id -> operator_id`
