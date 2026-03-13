@@ -1,8 +1,27 @@
 {
   "meta": {
     "name": "agent-harness",
-    "version": "0.2.0",
-    "status": "design"
+    "version": "0.2.1",
+    "status": "design",
+    "feature_contract": {
+      "source_of_truth": "features.json",
+      "status_values": [
+        "planned",
+        "in_progress",
+        "done",
+        "blocked",
+        "tech_debt"
+      ],
+      "required_fields": [
+        "id",
+        "name",
+        "description",
+        "status",
+        "layers",
+        "acceptance_criteria",
+        "artifacts"
+      ]
+    }
   },
   "layers": [
     {
@@ -197,6 +216,69 @@
       "name": "Architecture & Docs",
       "description": "Generate and maintain ARCHITECTURE.md and docs index.",
       "status": "planned"
+    },
+    {
+      "id": "l1-ops-001",
+      "name": "Time Window Metric Aggregation",
+      "description": "L1 gateway should support querying persisted metrics with time-window aggregation so operations can inspect recent traffic quality without parsing raw logs.",
+      "status": "planned",
+      "layers": [
+        "L1"
+      ],
+      "priority": "high",
+      "type": "backlog",
+      "acceptance_criteria": [
+        "Gateway exposes a metrics query interface that supports at least one explicit time window parameter.",
+        "Returned data includes aggregated totals, authorized or rejected counts, and latency summary for the requested window.",
+        "Overview documentation explains how the time window query is used by operations staff."
+      ],
+      "artifacts": [
+        "docs/PLANS.md",
+        "docs/QUALITY_SCORE.md",
+        "docs/RELIABILITY.md"
+      ]
+    },
+    {
+      "id": "l1-ops-002",
+      "name": "Audit And Metrics Retention Policy",
+      "description": "L1 gateway should archive audit and metric logs with a unified directory and rotation policy so long-running operations stay traceable without unbounded local growth.",
+      "status": "planned",
+      "layers": [
+        "L1"
+      ],
+      "priority": "high",
+      "type": "backlog",
+      "acceptance_criteria": [
+        "Audit and metrics files are written under one documented operations data directory.",
+        "Rotation or retention rules are implemented and documented for both audit and metrics logs.",
+        "Operational recovery steps describe where current and archived records are stored."
+      ],
+      "artifacts": [
+        "docs/RELIABILITY.md",
+        "docs/SECURITY.md",
+        "docs/OBSERVABILITY.md"
+      ]
+    },
+    {
+      "id": "l1-ops-003",
+      "name": "Operational Health Score",
+      "description": "L1 gateway overview should include a health score derived from upstream status, rejection patterns, and recent failures so operators can assess service condition at a glance.",
+      "status": "planned",
+      "layers": [
+        "L1"
+      ],
+      "priority": "medium",
+      "type": "backlog",
+      "acceptance_criteria": [
+        "Overview endpoint returns an explicit health score field with a documented scoring rule.",
+        "Scoring rule considers upstream health and recent gateway errors rather than static configuration only.",
+        "Quality rubric defines what score ranges require operator follow-up."
+      ],
+      "artifacts": [
+        "docs/QUALITY_SCORE.md",
+        "docs/OBSERVABILITY.md",
+        "ARCHITECTURE.md"
+      ]
     }
   ]
 }
