@@ -245,3 +245,25 @@ flowchart LR
 - `file_parse -> rule_engine -> structured_extraction -> L4` 的兜底链路可跑通
 - L3 内部能力模块与 L2 场景代码分离
 - L3 能对每次能力调用返回统一结构
+
+
+## 15. 能力级运营视图
+当前 `atomic-ai-engine` 已规划并落地最小能力级运营视图，用于被 L1 控制台聚合。
+
+### 15.1 运营接口
+- `GET /ops/overview`
+- `GET /ops/capabilities`
+- `GET /ops/capabilities/{capability_code}`
+
+### 15.2 当前输出内容
+- 总调用量
+- 成功/失败调用量
+- 平均耗时
+- 按能力聚合的调用统计
+- 错误码统计
+- 最近调用记录
+
+### 15.3 价值
+- 让 L3 从“能调用”进入“可运营”
+- 为 L1 控制台提供能力级调用量、错误码和耗时数据源
+- 为后续能力限流、审计和成本视图打基础
