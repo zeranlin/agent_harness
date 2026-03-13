@@ -1,9 +1,14 @@
 #!/usr/bin/env sh
 set -eu
 
-# Placeholder runner: integrate actual project tests here.
-# Example (to be replaced with real repos):
-# (cd /path/to/agent-gateway-basic && mvn -q test)
-# (cd /path/to/agent-business-solution && pytest -q)
+root="/Users/linzeran/code/2026-zn/harnees_aimp"
 
-echo "test runner placeholder"
+"$root/agent-gateway-basic/scripts/test.sh"
+"$root/agent-business-solution/scripts/test.sh"
+"$root/atomic-ai-service/scripts/test.sh"
+"$root/agent-model-runtime/scripts/test.sh"
+"$root/agent-knowledge-ops/scripts/test.sh"
+"$root/agent-model-hub/scripts/test.sh"
+"$root/agent-platform-foundation/scripts/test.sh"
+
+echo "test runner ok"
