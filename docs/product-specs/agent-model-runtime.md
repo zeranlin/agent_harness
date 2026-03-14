@@ -293,6 +293,7 @@ flowchart LR
 - `GET /ops/overview`
 - `GET /ops/jobs`
 - 模型级熔断与备用路由
+- 非结构化模型输出的二次 JSON 整理兜底
 
 ### 10.2 第二阶段再做
 - 异步任务
@@ -322,6 +323,8 @@ flowchart LR
   - `duration_ms`
   - `attempts`
   - `cached`
+  - `normalization_applied`
+  - `structure_error`
 
 ### 11.4 审计性
 - 每个执行请求可追踪。
