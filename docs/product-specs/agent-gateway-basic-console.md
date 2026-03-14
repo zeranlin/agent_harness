@@ -89,6 +89,7 @@
 - 查看错误定位
 - 查看重试与熔断状态
 - 支持从调试台直接触发完整链路样例：`L1 -> L2 procurement_file_review -> L3 atomic-ai-engine -> L4 agent-model-runtime -> qwen3.5-27b`
+- 调试台顶部提供链路摘要卡片，直接展示链路状态、目标契约、是否命中 `qwen3.5-27b`、问题层级
 
 ### 5.3 回放与复现
 - 根据 `request_id` 回放
